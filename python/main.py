@@ -96,6 +96,6 @@ class Consumer:
 
 
 if __name__ == "__main__":
-    model_path = 'path/to/your/yolo_model.pth'
+    model_path = 'path of your yolo_model'
     consumer = Consumer(model_path)
     consumer.start()
