@@ -1,0 +1,60 @@
+spring.application.name: model_predict
+
+# database
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+
+  # session
+  session:
+    jdbc.initialize-schema: always
+    timeout: 60m
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    template.default-receive-queue: hydra_queue
+    virtual-host: admin_host
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+# server address
+server:
+  address: localhost
+  port: 8080
+
+
+
+springdoc:
+  swagger-ui:
+    path: /doc/swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+
+
+python:
+  server:
+    secret: xf10pOX1%PEM*N3NhYf^Rr7AXI2slZg$jSXbSLS3Yza@SJSv
+
+file:
+  upload-dir: ./uploads
+
+
+
+
