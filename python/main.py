@@ -17,11 +17,12 @@ logging.basicConfig(level=logging.INFO,
 
 
 class Consumer:
-    def __init__(self, model_path, queue_name='hydra_queue'):
+    def __init__(self):
         self.url = "http://localhost:8080"  # 实际后端地址
         self.secret = "xf10pOX1%PEM*N3NhYf^Rr7AXI2slZg$jSXbSLS3Yza@SJSv"  # 验证密钥 不要泄露
-        self.model = YOLOModel(model_path)
-        self.queue_name = queue_name
+        self.model_path = "your model path"
+        self.model = YOLOModel(self.model_path)
+        self.queue_name = 'hydra_queue'
         self.connection = pika.BlockingConnection(pika.ConnectionParameters('localhost',
                                                                             5672,
                                                                             'admin_host',
@@ -96,6 +97,5 @@ class Consumer:
 
 
 if __name__ == "__main__":
-    model_path = 'path of your yolo_model'
-    consumer = Consumer(model_path)
+    consumer = Consumer()
     consumer.start()
