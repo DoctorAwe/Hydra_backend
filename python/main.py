@@ -37,7 +37,7 @@ class Consumer:
             response = requests.get(self.url + url)
             response.raise_for_status()
             image = Image.open(io.BytesIO(response.content)).convert('RGB')
-            # image_array = self.model.process_image(image)
+            image_array = self.model.process_image(image)
             logging.info(f"fetch image using {time.time()-s_time}sec")
             return image
         except Exception as e:
@@ -66,8 +66,8 @@ class Consumer:
                 if response.get('code'):
                     logging.error(f"Request Failed: {res.json()}")
             image_array = self.fetch_image(message.get("image_url"))
-            # outputs = self.inference(image_array)
-            outputs = [[0, 0.1, 0.1, 0.2, 0.2, 0.9], [0, 0.3, 0.3, 0.4, 0.4, 0.8], [0, 0.5, 0.5, 0.6, 0.6, 0.9]]
+            outputs = self.inference(image_array)
+            # outputs = [[0, 0.1, 0.1, 0.2, 0.2, 0.9], [0, 0.3, 0.3, 0.4, 0.4, 0.8], [0, 0.5, 0.5, 0.6, 0.6, 0.9]]
             logging.info("the current task is completed")
             params = {
                 'outputs': str(outputs),
